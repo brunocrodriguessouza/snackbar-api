@@ -2,13 +2,11 @@ package com.brunosouza.snackbar.model;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -22,8 +20,7 @@ public class Snack {
 	@NotEmpty(message = "Description is mandatory")
 	private String description;
 
-	@ElementCollection(fetch = FetchType.LAZY, targetClass = Ingredient.class)
-	@Column(name = "ingredients", length = 30)
+	@ManyToMany()
 	private List<Ingredient> ingredients;
 
 	public Integer getId() {
