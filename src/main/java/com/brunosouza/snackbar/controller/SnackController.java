@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.brunosouza.snackbar.exception.ExceptionAlreadyExists;
+import com.brunosouza.snackbar.messages.ResponseMessage;
 import com.brunosouza.snackbar.model.Snack;
 import com.brunosouza.snackbar.service.SnackService;
 
@@ -33,13 +35,24 @@ public class SnackController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void insertSnack(@RequestBody Snack snack) {
-		snackservice.insertSnack(snack);
+	public ResponseMessage insertSnack(@RequestBody Snack snack) {
+		try {
+			snackservice.insertSnack(snack);
+			return new ResponseMessage("Success", "Snack inserted successfully" + snack.getId());
+		} catch(ExceptionAlreadyExists e) {
+			return new ResponseMessage("Error", "Snack Already exists");
+		}
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateSnack(@RequestBody Snack snack) {
-		snackservice.updateSnack(snack);
+	public ResponseMessage updateSnack(@RequestBody Snack snack) {
+		try {
+			snackservice.updateSnack(snack);
+			return new ResponseMessage("Success", "Snack " + snack.getId() + " updated successfully" );
+		} catch(ExceptionAlreadyExists e) {
+			return new ResponseMessage("Error", "Snack Already exists");
+		}
+		
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)

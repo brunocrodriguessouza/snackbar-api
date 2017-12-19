@@ -3,26 +3,25 @@ package com.brunosouza.snackbar.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
-public class Snack {
-
+public class Order {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
-	@NotEmpty(message = "Description is mandatory")
+	
 	private String description;
-
-	@ManyToMany()
-	private List<Ingredient> ingredients;
+	
+    @ManyToMany()
+	private List<Snack> snacks;
 
 	public Integer getId() {
 		return id;
@@ -30,6 +29,14 @@ public class Snack {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public List<Snack> getSnacks() {
+		return snacks;
+	}
+
+	public void setSnacks(List<Snack> snacks) {
+		this.snacks = snacks;
 	}
 
 	public String getDescription() {
@@ -40,11 +47,4 @@ public class Snack {
 		this.description = description;
 	}
 
-	public List<Ingredient> getIngredients() {
-		return ingredients;
-	}
-
-	public void setIngredients(List<Ingredient> ingredients) {
-		this.ingredients = ingredients;
-	}
 }
