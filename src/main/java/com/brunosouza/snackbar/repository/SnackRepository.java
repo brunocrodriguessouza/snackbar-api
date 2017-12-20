@@ -10,6 +10,8 @@ public interface SnackRepository extends CrudRepository<Snack, Integer>{
 	
 	public Snack findById(Integer id);
 	
+	public List<Snack> findByDescription(String description);
+	
 	public void delete(Integer id);
 	
 	public List<Snack> findByDescriptionContaining(String description);
