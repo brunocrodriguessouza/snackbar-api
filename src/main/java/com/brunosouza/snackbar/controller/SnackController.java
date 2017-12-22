@@ -38,7 +38,7 @@ public class SnackController {
 	public ResponseMessage insertSnack(@RequestBody Snack snack) {
 		try {
 			snackservice.insertSnack(snack);
-			return new ResponseMessage("Success", "Snack inserted successfully" + snack.getId());
+			return new ResponseMessage("Success", "Snack "+ snack.getId() + " inserted successfully" );
 		} catch(ExceptionAlreadyExists e) {
 			return new ResponseMessage("Error", "Snack Already exists");
 		}

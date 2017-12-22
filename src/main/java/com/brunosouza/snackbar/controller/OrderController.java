@@ -20,18 +20,23 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 
+//	@RequestMapping(method = RequestMethod.GET)
+//	public Iterable<Order> getAllOrders(@RequestParam(value = "description", required = false) String description) {
+//		if (description == null) {
+//			return orderService.getAllOrders();
+//		}
+//		return orderService.getOrderByDescription(description);
+//	}
+	
 	@RequestMapping(method = RequestMethod.GET)
-	public Iterable<Order> getAllsnacks(@RequestParam(value = "description", required = false) String description) {
-		if (description == null) {
+	public Iterable<Order> getAllOrders() {
 			return orderService.getAllOrders();
-		}
-		return orderService.getOrderByDescription(description);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Order getOrderById(@PathVariable("id") int id) {
-		return orderService.getOrderById(id);
-	}
+//	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//	public Order getOrderById(@PathVariable("id") int id) {
+//		return orderService.getOrderById(id);
+//	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseMessage insertOrder(@RequestBody Order order) {
